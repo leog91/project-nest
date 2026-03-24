@@ -1,23 +1,52 @@
 import fs from 'fs/promises'
 import path from 'path'
+import { useStorage } from 'nitro/storage'
 import type { Commit, CommitInfo, DataMetadata, GitHubRepo } from './github'
 
-const DATA_FILE = path.join(process.cwd(), 'data', 'repos.json')
+const dataStorage = useStorage('assets/data')
+const DATA_FILE = 'repos.data'
+const LOCAL_DATA_FILE = path.join(process.cwd(), 'app-data', DATA_FILE)
+
+type RepoDataFile = {
+  username?: string
+  lastUpdated?: string | null
+  repos?: GitHubRepo[]
+}
+
+async function loadRepoData(): Promise<RepoDataFile> {
+  try {
+    let raw: string | Uint8Array | null | undefined
+
+    if (import.meta.env.PROD) {
+      raw = await dataStorage.getItemRaw(DATA_FILE)
+    } else {
+      raw = await fs.readFile(LOCAL_DATA_FILE, 'utf-8')
+    }
+
+    if (!raw) return {}
+
+    const content =
+      typeof raw === 'string'
+        ? raw
+        : raw instanceof Uint8Array
+          ? new TextDecoder().decode(raw)
+          : String(raw)
+
+    return JSON.parse(content) as RepoDataFile
+  } catch {
+    return {}
+  }
+}
 
 async function loadRepos(): Promise<GitHubRepo[]> {
-  try {
-    const content = await fs.readFile(DATA_FILE, 'utf-8')
-    const data = JSON.parse(content)
-    return data.repos || []
-  } catch {
-    return []
-  }
+  const data = await loadRepoData()
+  return data.repos || []
 }
 
 export async function getDataMetadata(): Promise<DataMetadata> {
   try {
-    const content = await fs.readFile(DATA_FILE, 'utf-8')
-    const data = JSON.parse(content)
+    const data = await loadRepoData()
+
     return {
       username: data.username || 'unknown',
       lastUpdated: data.lastUpdated || null,

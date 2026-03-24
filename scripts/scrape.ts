@@ -1,10 +1,11 @@
 import fs from 'fs/promises'
 import path from 'path'
 
-const DATA_DIR = 'data'
-const DATA_FILE = path.join(DATA_DIR, 'repos.json')
-const PROGRESS_FILE = path.join(DATA_DIR, 'scrape-progress.json')
-const STATE_FILE = path.join(DATA_DIR, 'scrape-state.json')
+const DATA_DIR = 'app-data'
+const SCRAPER_DIR = '.cache'
+const DATA_FILE = path.join(DATA_DIR, 'repos.data')
+const PROGRESS_FILE = path.join(SCRAPER_DIR, 'scrape-progress.json')
+const STATE_FILE = path.join(SCRAPER_DIR, 'scrape-state.json')
 const ENV_FILE = '.env'
 const STALE_RUN_MS = 5 * 60 * 1000
 
@@ -114,6 +115,7 @@ class EmptyRepositoryError extends Error {
 
 async function ensureDir() {
   await fs.mkdir(DATA_DIR, { recursive: true })
+  await fs.mkdir(SCRAPER_DIR, { recursive: true })
 }
 
 async function loadState(): Promise<ScrapeState> {
@@ -163,6 +165,11 @@ async function saveProgress(progress: Progress) {
 
 async function clearProgress() {
   await fs.rm(PROGRESS_FILE, { force: true })
+}
+
+async function removeLegacyDataFiles() {
+  await fs.rm(path.join('data', 'repos.json'), { force: true })
+  await fs.rm(path.join('data', 'repos.data'), { force: true })
 }
 
 async function loadRepos(): Promise<Repo[]> {
@@ -461,6 +468,7 @@ async function run() {
   log(`\n=== GitHub Scraper for ${USERNAME} ===\n`)
 
   await ensureDir()
+  await removeLegacyDataFiles()
   
   // Load existing state
   state = await loadState()

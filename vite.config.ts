@@ -17,6 +17,14 @@ const config = defineConfig({
     nitro(),
     viteReact(),
   ],
+  nitro: {
+    serverAssets: [
+      {
+        baseName: 'data',
+        dir: './app-data',
+      },
+    ],
+  },
 })
 
 export default config
