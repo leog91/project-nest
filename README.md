@@ -1,193 +1,243 @@
-Welcome to your new TanStack Start app! 
+# ProjectNest — GitHub Activity Dashboard
 
-# Getting Started
+A personal dashboard to track and browse GitHub repository activity. It scrapes data from the GitHub API and serves it through a fast, static frontend.
 
-To run this application:
+**Data Flow:** GitHub API → Scraper Script → `app-data/repos.data` → Frontend (no live API calls)
+
+---
+
+## Tech Stack
+
+- **[TanStack Start](https://tanstack.com/start)** — Full-stack React framework
+- **[TanStack Router](https://tanstack.com/router)** — File-based routing
+- **[TanStack Query](https://tanstack.com/query)** — Client-side data caching
+- **[TanStack Table](https://tanstack.com/table)** — Data tables
+- **[Tailwind CSS v4](https://tailwindcss.com)** — Styling
+- **[Nitro](https://nitro.unjs.io)** — Production server
+- **[Vite](https://vitejs.dev)** — Build tool
+
+---
+
+## Prerequisites
+
+- [Node.js](https://nodejs.org/) (v20+ recommended)
+- [pnpm](https://pnpm.io) (or npm — the project uses `pnpm` by convention, see `bun.lock` / `package-lock.json`)
+
+---
+
+## Installation
 
 ```bash
-npm install
-npm run dev
+# Clone or navigate into the project
+cd project-nest
+
+# Install dependencies
+pnpm install
+# or: npm install
 ```
 
-# Building For Production
+---
 
-To build this application for production:
+## Running the App
+
+### Development
 
 ```bash
-npm run build
+pnpm dev
+# or: npm run dev
 ```
 
-## Testing
+The dev server starts on `http://localhost:3000`.
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+> **WSL2 Users:** If you get `ERR_CONNECTION_RESET` when opening `localhost:3000` from Windows, the server is already configured to bind to all interfaces (`host: true` in `vite.config.ts`). If you still have issues, try accessing the app via the WSL2 IP:
+> ```bash
+> hostname -I
+> # Then open http://<WSL_IP>:3000
+> ```
+
+### Production Build
 
 ```bash
-npm run test
+pnpm build
+# or: npm run build
 ```
 
-## Styling
+### Preview Production Build
 
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `npm install @tailwindcss/vite tailwindcss -D`
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
+```bash
+pnpm preview
+# or: npm run preview
 ```
 
-Then anywhere in your JSX you can use it like so:
+### Run Tests
 
-```tsx
-<Link to="/about">About</Link>
+```bash
+pnpm test
+# or: npm run test
 ```
 
-This will create a link that will navigate to the `/about` route.
+---
 
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
+## Updating the Data
 
-### Using A Layout
+The app does **not** call the GitHub API from the browser. Instead, a Node.js scraper fetches repositories and commit metadata, then stores everything in `app-data/repos.data`. The frontend reads this local file.
 
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
+### 1. Set up a GitHub Token (Recommended)
 
-Here is an example layout that includes a header:
+Without a token, GitHub's unauthenticated rate limit is **60 requests per hour**. With a token, it jumps to **5,000 per hour**.
 
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+```bash
+# Copy the example env file
+cp .env.example .env
 
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
+# Edit .env and add your personal access token
+# GITHUB_TOKEN=ghp_xxxxxxxxxxxxxxxxxxxx
 ```
 
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
+You can create a token at [github.com/settings/tokens](https://github.com/settings/tokens) — no special scopes are required for public repo data.
 
-## Server Functions
+### 2. Run the Scraper
 
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
+```bash
+# Scrape the default user (leog91)
+pnpm scrape
+# or: npm run scrape
 
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
+# Scrape a specific GitHub user
+pnpm scrape:leog91
+# or: npm run scrape <username>
 ```
 
-## API Routes
+The scraper runs in two phases:
+1. **Fetching repositories** — Pulls all repos for the user (paginated, 100 per page).
+2. **Fetching commits** — For each repo, fetches the first and last commit dates and total commit count.
 
-You can create API routes by using the `server` property in your route definitions:
+### 3. Check Scraper Status
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
+```bash
+pnpm scrape:status
+# or: npm run scrape -- --status
 ```
 
-## Data Fetching
+This prints a summary of the current scrape state, including:
+- Whether a scrape is running, idle, or complete
+- How many repos and commits have been processed
+- Total API calls made
+- Any errors (e.g., rate limiting)
 
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
+### Resume Capability
 
-For example:
+The scraper is fault-tolerant:
+- If you hit a rate limit, it stops and saves progress.
+- If you stop it manually (`Ctrl+C`), it saves progress.
+- The next time you run `pnpm scrape`, it resumes exactly where it left off.
+- If a repo gets a new push since the last scrape, its commit metadata is automatically refreshed.
 
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
+### Data Files
 
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
+| File | Description |
+|------|-------------|
+| `app-data/repos.data` | The main data file consumed by the frontend. Contains all repos, metadata, and commit info. |
+| `.cache/scrape-state.json` | High-level scraper state (running/complete/error, stats). |
+| `.cache/scrape-progress.json` | Low-level progress (current page, repo index) for resuming. |
 
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
+---
+
+## Project Structure
+
+```
+project-nest/
+├── app-data/
+│   └── repos.data              # Scraped GitHub data (generated)
+├── .cache/
+│   ├── scrape-state.json       # Scraper state (generated)
+│   └── scrape-progress.json    # Scraper progress (generated)
+├── public/                     # Static assets
+├── scripts/
+│   └── scrape.ts               # GitHub scraper script
+├── src/
+│   ├── components/
+│   │   ├── Footer.tsx
+│   │   ├── Header.tsx
+│   │   ├── QueryProvider.tsx
+│   │   ├── RepoTable.tsx
+│   │   └── ThemeToggle.tsx
+│   ├── lib/
+│   │   └── github.ts           # Helpers to read local repo data
+│   ├── routes/                 # TanStack file-based routes
+│   │   ├── __root.tsx          # Root layout
+│   │   ├── about.tsx
+│   │   ├── index.tsx           # Home / repo list
+│   │   └── repo.$owner.$name.tsx # Repo detail page
+│   ├── router.tsx
+│   └── styles.css
+├── .env                        # GitHub token (not committed)
+├── .env.example
+├── package.json
+├── tsconfig.json
+├── vite.config.ts
+└── README.md
 ```
 
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
+### Routes
 
-# Demo files
+| Route | Description |
+|-------|-------------|
+| `/` | Home page — lists all repositories in a sortable table. |
+| `/repo/:owner/:name` | Detail page for a specific repository. |
+| `/about` | About page. |
 
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
+---
 
-# Learn More
+## Available Scripts
 
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
+| Script | Description |
+|--------|-------------|
+| `pnpm dev` | Start the Vite dev server on port 3000. |
+| `pnpm build` | Build the app for production. |
+| `pnpm preview` | Preview the production build locally. |
+| `pnpm test` | Run the Vitest test suite. |
+| `pnpm scrape` | Run the GitHub scraper for the default user. |
+| `pnpm scrape <user>` | Run the scraper for a specific GitHub user. |
+| `pnpm scrape:status` | Print the current scraper status. |
 
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+---
+
+## Troubleshooting
+
+### `ERR_CONNECTION_RESET` on WSL2
+
+If `localhost:3000` refuses to connect from your Windows browser, the Vite server is likely binding to `127.0.0.1` inside WSL2 only. This project already includes the fix in `vite.config.ts`:
+
+```ts
+server: {
+  host: true, // Binds to 0.0.0.0
+},
+```
+
+If the issue persists:
+1. Try the WSL2 IP directly: `http://$(hostname -I | awk '{print $1}'):3000`
+2. Ensure no other service is using port 3000.
+3. Temporarily disable Windows Defender Firewall for WSL or add a rule for Node.js.
+
+### Rate Limited During Scrape
+
+If you see `Rate limited. Try again in about Xs.`:
+1. Wait for the countdown and run `pnpm scrape` again — it will resume.
+2. **Strongly recommended:** Add a `GITHUB_TOKEN` to `.env` to increase the limit from 60 to 5,000 requests/hour.
+
+### Stale Scraper State
+
+If the scraper thinks it's still running but you know it crashed:
+
+```bash
+pnpm scrape:status
+# Then just run pnpm scrape again — it auto-detects stale runs (>5 min old)
+# and clears them automatically.
+```
+
+---
+
+## License
+
+Private — for personal use.
