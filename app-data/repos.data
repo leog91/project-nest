@@ -1,6 +1,6 @@
 {
   "username": "leog91",
-  "lastUpdated": "2026-03-24T23:28:13.917Z",
+  "lastUpdated": "2026-05-20T07:24:48.890Z",
   "repos": [
     {
       "id": 434000690,
@@ -70,14 +70,14 @@
       "releases_url": "https://api.github.com/repos/leog91/dis-bot/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/dis-bot/deployments",
       "created_at": "2021-12-01T22:08:13Z",
-      "updated_at": "2026-03-16T04:41:54Z",
-      "pushed_at": "2026-03-16T04:41:50Z",
+      "updated_at": "2026-05-18T00:01:20Z",
+      "pushed_at": "2026-05-18T00:01:17Z",
       "git_url": "git://github.com/leog91/dis-bot.git",
       "ssh_url": "git@github.com:leog91/dis-bot.git",
       "clone_url": "https://github.com/leog91/dis-bot.git",
       "svn_url": "https://github.com/leog91/dis-bot",
       "homepage": null,
-      "size": 20360,
+      "size": 20467,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -106,8 +106,15 @@
       "default_branch": "main",
       "commits": {
         "firstCommit": "2021-12-01T22:09:22Z",
-        "lastCommit": "2026-03-16T04:41:45Z",
-        "totalCommits": 74
+        "lastCommit": "2026-05-18T00:01:13Z",
+        "totalCommits": 94
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -216,6 +223,13 @@
         "firstCommit": "2026-03-04T22:59:58Z",
         "lastCommit": "2026-03-05T00:24:30Z",
         "totalCommits": 7
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -324,6 +338,13 @@
         "firstCommit": "2020-03-25T00:28:20Z",
         "lastCommit": "2020-03-25T01:39:16Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -432,6 +453,13 @@
         "firstCommit": "2019-10-25T01:37:27Z",
         "lastCommit": "2019-10-25T02:01:02Z",
         "totalCommits": 3
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -540,6 +568,13 @@
         "firstCommit": "2025-10-19T03:11:39Z",
         "lastCommit": "2026-01-20T23:11:00Z",
         "totalCommits": 12
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -610,14 +645,14 @@
       "releases_url": "https://api.github.com/repos/leog91/jukebox/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/jukebox/deployments",
       "created_at": "2023-05-13T01:45:06Z",
-      "updated_at": "2025-12-12T01:18:46Z",
-      "pushed_at": "2025-12-19T02:41:29Z",
+      "updated_at": "2026-05-20T06:04:30Z",
+      "pushed_at": "2026-05-20T06:04:26Z",
       "git_url": "git://github.com/leog91/jukebox.git",
       "ssh_url": "git@github.com:leog91/jukebox.git",
       "clone_url": "https://github.com/leog91/jukebox.git",
       "svn_url": "https://github.com/leog91/jukebox",
       "homepage": "https://jukebox-seven.vercel.app",
-      "size": 737,
+      "size": 760,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -646,8 +681,15 @@
       "default_branch": "main",
       "commits": {
         "firstCommit": "2023-05-07T02:41:48Z",
-        "lastCommit": "2025-12-12T01:18:41Z",
-        "totalCommits": 98
+        "lastCommit": "2026-05-20T06:04:21Z",
+        "totalCommits": 99
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -718,14 +760,14 @@
       "releases_url": "https://api.github.com/repos/leog91/gustoso/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/gustoso/deployments",
       "created_at": "2025-05-28T17:56:36Z",
-      "updated_at": "2025-12-04T04:30:12Z",
-      "pushed_at": "2025-12-04T04:30:09Z",
+      "updated_at": "2026-05-18T01:55:06Z",
+      "pushed_at": "2026-05-18T01:55:02Z",
       "git_url": "git://github.com/leog91/gustoso.git",
       "ssh_url": "git@github.com:leog91/gustoso.git",
       "clone_url": "https://github.com/leog91/gustoso.git",
       "svn_url": "https://github.com/leog91/gustoso",
       "homepage": "https://gustoso-app.netlify.app/",
-      "size": 1170,
+      "size": 1528,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "Astro",
@@ -754,8 +796,15 @@
       "default_branch": "master",
       "commits": {
         "firstCommit": "2025-05-28T17:52:15Z",
-        "lastCommit": "2025-12-04T04:30:04Z",
-        "totalCommits": 22
+        "lastCommit": "2026-05-18T01:53:23Z",
+        "totalCommits": 37
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -826,14 +875,14 @@
       "releases_url": "https://api.github.com/repos/leog91/hiker/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/hiker/deployments",
       "created_at": "2024-04-01T01:41:13Z",
-      "updated_at": "2025-05-28T05:13:14Z",
-      "pushed_at": "2025-05-28T05:13:10Z",
+      "updated_at": "2026-05-20T06:28:42Z",
+      "pushed_at": "2026-05-20T06:28:39Z",
       "git_url": "git://github.com/leog91/hiker.git",
       "ssh_url": "git@github.com:leog91/hiker.git",
       "clone_url": "https://github.com/leog91/hiker.git",
       "svn_url": "https://github.com/leog91/hiker",
       "homepage": "https://hiker-navy.vercel.app",
-      "size": 217,
+      "size": 225,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -862,8 +911,15 @@
       "default_branch": "master",
       "commits": {
         "firstCommit": "2024-04-01T01:40:37Z",
-        "lastCommit": "2025-05-28T05:13:08Z",
-        "totalCommits": 12
+        "lastCommit": "2026-05-20T06:28:36Z",
+        "totalCommits": 14
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -972,6 +1028,13 @@
         "firstCommit": "2024-06-09T05:32:38Z",
         "lastCommit": "2024-11-06T05:19:37Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1080,6 +1143,13 @@
         "firstCommit": "2024-07-02T04:50:53Z",
         "lastCommit": "2024-07-02T04:50:53Z",
         "totalCommits": 1
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1188,6 +1258,13 @@
         "firstCommit": "2019-05-24T09:06:40Z",
         "lastCommit": "2019-06-15T07:00:32Z",
         "totalCommits": 7
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1296,6 +1373,13 @@
         "firstCommit": "2023-01-08T02:42:40Z",
         "lastCommit": "2024-04-20T13:27:39Z",
         "totalCommits": 12
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1404,6 +1488,13 @@
         "firstCommit": "2020-11-14T06:37:56Z",
         "lastCommit": "2023-05-13T02:47:09Z",
         "totalCommits": 80
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1518,6 +1609,13 @@
         "firstCommit": "2017-10-18T21:43:20Z",
         "lastCommit": "2020-05-15T03:03:35Z",
         "totalCommits": 605
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1626,6 +1724,13 @@
         "firstCommit": "2020-01-12T21:52:52Z",
         "lastCommit": "2020-03-30T22:30:10Z",
         "totalCommits": 5
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1734,6 +1839,13 @@
         "firstCommit": "2022-10-31T17:31:55Z",
         "lastCommit": "2022-11-15T01:21:17Z",
         "totalCommits": 5
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1842,6 +1954,13 @@
         "firstCommit": "2022-03-15T05:18:45Z",
         "lastCommit": "2022-03-15T05:24:51Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -1950,6 +2069,13 @@
         "firstCommit": "2021-12-17T06:02:49Z",
         "lastCommit": "2021-12-17T07:36:05Z",
         "totalCommits": 3
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2058,6 +2184,13 @@
         "firstCommit": "2021-11-30T21:47:20Z",
         "lastCommit": "2021-11-30T22:54:40Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2166,6 +2299,13 @@
         "firstCommit": "2021-10-17T13:13:37Z",
         "lastCommit": "2021-10-18T03:09:16Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2274,6 +2414,13 @@
         "firstCommit": "2021-09-24T00:25:36Z",
         "lastCommit": "2021-09-29T02:11:59Z",
         "totalCommits": 3
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2382,6 +2529,13 @@
         "firstCommit": "2020-01-05T00:11:50Z",
         "lastCommit": "2020-06-12T03:02:01Z",
         "totalCommits": 7
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2490,6 +2644,13 @@
         "firstCommit": "2021-01-28T19:00:19Z",
         "lastCommit": "2021-01-28T19:17:41Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2599,6 +2760,13 @@
         "lastCommit": null,
         "totalCommits": 0,
         "isEmpty": true
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2707,6 +2875,13 @@
         "firstCommit": "2019-05-22T05:27:21Z",
         "lastCommit": "2019-07-17T15:39:34Z",
         "totalCommits": 10
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2821,6 +2996,13 @@
         "firstCommit": "2017-10-18T21:43:20Z",
         "lastCommit": "2018-10-30T15:14:50Z",
         "totalCommits": 187
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -2929,6 +3111,13 @@
         "firstCommit": "2017-12-01T19:18:53Z",
         "lastCommit": "2018-05-21T19:19:38Z",
         "totalCommits": 23
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3037,6 +3226,13 @@
         "firstCommit": "2017-12-07T21:07:03Z",
         "lastCommit": "2017-12-22T14:37:12Z",
         "totalCommits": 3
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3145,6 +3341,13 @@
         "firstCommit": "2017-04-06T04:09:53Z",
         "lastCommit": "2017-07-19T02:34:46Z",
         "totalCommits": 34
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3253,6 +3456,13 @@
         "firstCommit": "2017-04-04T22:13:03Z",
         "lastCommit": "2017-07-19T02:34:17Z",
         "totalCommits": 42
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3361,6 +3571,13 @@
         "firstCommit": "2017-05-11T18:21:45Z",
         "lastCommit": "2017-07-07T10:25:06Z",
         "totalCommits": 13
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3469,6 +3686,13 @@
         "firstCommit": "2017-04-04T22:08:39Z",
         "lastCommit": "2017-07-06T09:24:03Z",
         "totalCommits": 10
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3578,6 +3802,13 @@
         "lastCommit": null,
         "totalCommits": 0,
         "isEmpty": true
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3686,6 +3917,13 @@
         "firstCommit": "2016-09-22T23:55:03Z",
         "lastCommit": "2016-10-02T09:20:46Z",
         "totalCommits": 2
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3794,6 +4032,13 @@
         "firstCommit": "2015-09-29T14:51:24Z",
         "lastCommit": "2015-12-03T21:18:16Z",
         "totalCommits": 40
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3902,6 +4147,13 @@
         "firstCommit": "2015-10-28T22:18:45Z",
         "lastCommit": "2015-10-28T22:18:45Z",
         "totalCommits": 1
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     },
     {
@@ -3972,14 +4224,14 @@
       "releases_url": "https://api.github.com/repos/leog91/project-nest/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/project-nest/deployments",
       "created_at": "2026-03-24T23:04:38Z",
-      "updated_at": "2026-03-24T23:18:15Z",
-      "pushed_at": "2026-03-24T23:18:11Z",
+      "updated_at": "2026-03-24T23:32:59Z",
+      "pushed_at": "2026-03-24T23:32:55Z",
       "git_url": "git://github.com/leog91/project-nest.git",
       "ssh_url": "git@github.com:leog91/project-nest.git",
       "clone_url": "https://github.com/leog91/project-nest.git",
       "svn_url": "https://github.com/leog91/project-nest",
       "homepage": "https://project-nest-psi.vercel.app",
-      "size": 0,
+      "size": 151,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -4008,8 +4260,15 @@
       "default_branch": "master",
       "commits": {
         "firstCommit": "2026-03-24T23:07:30Z",
-        "lastCommit": "2026-03-24T23:18:05Z",
-        "totalCommits": 3
+        "lastCommit": "2026-03-24T23:32:51Z",
+        "totalCommits": 4
+      },
+      "permissions": {
+        "admin": true,
+        "maintain": true,
+        "push": true,
+        "triage": true,
+        "pull": true
       }
     }
   ]
