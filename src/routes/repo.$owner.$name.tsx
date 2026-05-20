@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { createServerFn } from '@tanstack/react-start'
 import { Calendar, GitBranch, Star, GitFork, ExternalLink } from 'lucide-react'
 import { formatDate, formatNumber } from '../lib/github'
+import { getLanguageColor } from '../lib/languageColors'
 
 const getRepoPageData = createServerFn({ method: 'GET' })
   .inputValidator((data: { owner: string; name: string }) => data)
@@ -30,7 +31,7 @@ function RepoDetailPage() {
 
   if (!repo) {
     return (
-      <main className="page-wrap px-4 pb-8 pt-14">
+      <main className="page-wrap px-0 pb-8 pt-14 sm:px-4">
         <div className="island-shell rounded-2xl p-8 text-center">
           <p className="text-[var(--sea-ink-soft)]">Repository not found</p>
         </div>
@@ -39,7 +40,7 @@ function RepoDetailPage() {
   }
 
   return (
-    <main className="page-wrap px-4 pb-8 pt-14">
+    <main className="page-wrap px-0 pb-8 pt-14 sm:px-4">
       <div className="island-shell rise-in overflow-hidden rounded-2xl">
         <div className="border-b border-[var(--line)] bg-gradient-to-r from-[rgba(79,184,178,0.08)] to-transparent px-6 py-6">
           <div className="flex flex-wrap items-start justify-between gap-4">
@@ -85,16 +86,23 @@ function RepoDetailPage() {
               Object.entries(repo.languages)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 3)
-                .map(([lang]) => (
-                  <span
-                    key={lang}
-                    className="border-2 border-[var(--line)] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]"
-                  >
-                    {lang}
-                  </span>
-                ))
+                .map(([lang]) => {
+                  const color = getLanguageColor(lang)
+                  return (
+                    <span
+                      key={lang}
+                      className="border-2 border-[var(--line)] border-l-[8px] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]"
+                      style={color ? { borderLeftColor: color } : undefined}
+                    >
+                      {lang}
+                    </span>
+                  )
+                })
             ) : repo.language ? (
-              <span className="border-2 border-[var(--line)] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]">
+              <span
+                className="border-2 border-[var(--line)] border-l-[8px] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]"
+                style={{ borderLeftColor: getLanguageColor(repo.language) || 'var(--line)' }}
+              >
                 {repo.language}
               </span>
             ) : null}

@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import type { RepoWithCommits } from '../lib/github'
 import { formatDate, formatNumber } from '../lib/github'
+import { getLanguageColor } from '../lib/languageColors'
 import { ArrowUpDown, ChevronUp, ChevronDown } from 'lucide-react'
 
 const columnHelper = createColumnHelper<RepoWithCommits>()
@@ -28,31 +29,6 @@ const columns = [
         >
           {name}
         </Link>
-      )
-    },
-  }),
-  columnHelper.accessor((row) => row.languages, {
-    id: 'languages',
-    header: 'Languages',
-    enableSorting: false,
-    cell: (info) => {
-      const langs = info.getValue()
-      if (!langs || Object.keys(langs).length === 0) return '-'
-      const top3 = Object.entries(langs)
-        .sort((a, b) => b[1] - a[1])
-        .slice(0, 3)
-        .map(([name]) => name)
-      return (
-        <span className="flex flex-wrap gap-x-2 gap-y-1">
-          {top3.map((lang) => (
-            <span
-              key={lang}
-              className="border border-[var(--line)] bg-[var(--chip-bg)] px-1.5 py-0.5 text-xs font-medium text-[var(--sea-ink-soft)]"
-            >
-              {lang}
-            </span>
-          ))}
-        </span>
       )
     },
   }),
@@ -80,6 +56,35 @@ const columns = [
     cell: (info) => {
       const count = info.getValue()
       return count > 0 ? formatNumber(count) : '-'
+    },
+  }),
+  columnHelper.accessor((row) => row.languages, {
+    id: 'languages',
+    header: 'Languages',
+    enableSorting: false,
+    cell: (info) => {
+      const langs = info.getValue()
+      if (!langs || Object.keys(langs).length === 0) return '-'
+      const top3 = Object.entries(langs)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([name]) => name)
+      return (
+        <span className="flex gap-x-2">
+          {top3.map((lang) => {
+            const color = getLanguageColor(lang)
+            return (
+              <span
+                key={lang}
+                className="whitespace-nowrap border border-[var(--line)] border-l-[6px] bg-[var(--chip-bg)] px-1.5 py-0.5 text-xs font-medium text-[var(--sea-ink-soft)]"
+                style={color ? { borderLeftColor: color } : undefined}
+              >
+                {lang}
+              </span>
+            )
+          })}
+        </span>
+      )
     },
   }),
 ]
@@ -119,9 +124,9 @@ export default function RepoTable({ data }: RepoTableProps) {
               {headerGroup.headers.map((header) => (
                 <th
                   key={header.id}
-                  className="px-4 py-3 text-left text-sm font-semibold text-[var(--sea-ink)]"
+                  className="whitespace-nowrap px-0 py-1 text-left text-sm font-semibold text-[var(--sea-ink)] sm:px-4 sm:py-3"
                 >
-                  {header.isPlaceholder ? null : (
+                  {header.isPlaceholder ? null : header.column.getCanSort() ? (
                     <button
                       onClick={header.column.getToggleSortingHandler()}
                       className="inline-flex items-center gap-1.5 hover:text-[var(--lagoon-deep)]"
@@ -138,6 +143,11 @@ export default function RepoTable({ data }: RepoTableProps) {
                         <ArrowUpDown className="h-4 w-4 opacity-40" />
                       )}
                     </button>
+                  ) : (
+                    flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )
                   )}
                 </th>
               ))}
@@ -151,7 +161,7 @@ export default function RepoTable({ data }: RepoTableProps) {
               className="border-b border-[var(--line)] transition-colors hover:bg-[var(--link-bg-hover)]"
             >
               {row.getVisibleCells().map((cell) => (
-                <td key={cell.id} className="px-4 py-3 text-sm">
+                <td key={cell.id} className="whitespace-nowrap px-0 py-1 text-sm sm:px-4 sm:py-3">
                   {flexRender(cell.column.columnDef.cell, cell.getContext())}
                 </td>
               ))}

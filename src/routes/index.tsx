@@ -29,7 +29,7 @@ function HomePage() {
   const { repos, metadata } = Route.useLoaderData()
 
   return (
-    <main className="page-wrap px-4 pb-8 pt-8">
+    <main className="page-wrap px-0 pb-8 pt-8 sm:px-4">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
         <div>
           <div className="island-kicker mb-1">GitHub Activity</div>
