@@ -56,6 +56,7 @@ interface Repo {
   forks_count: number
   open_issues_count: number
   language: string | null
+  languages?: Record<string, number>
   visibility: string
   default_branch: string
   created_at: string
@@ -76,19 +77,20 @@ interface ScrapeState {
   completedAt: string | null
   isRunning: boolean
   isComplete: boolean
-  currentPhase: 'idle' | 'fetching-repos' | 'fetching-commits' | 'complete' | 'error'
+  currentPhase: 'idle' | 'fetching-repos' | 'fetching-commits' | 'fetching-languages' | 'complete' | 'error'
   currentItem: string | null
   error: string | null
   stats: {
     totalRepos: number
     reposWithCommits: number
     totalCommitsFetched: number
+    reposWithLanguages: number
     apiCalls: number
   }
 }
 
 interface Progress {
-  phase: 'repos' | 'commits'
+  phase: 'repos' | 'commits' | 'languages'
   repoPage: number
   totalRepoPages: number
   processedRepoNames: string[]
@@ -137,6 +139,7 @@ async function loadState(): Promise<ScrapeState> {
         totalRepos: 0,
         reposWithCommits: 0,
         totalCommitsFetched: 0,
+        reposWithLanguages: 0,
         apiCalls: 0
       }
     }
@@ -198,6 +201,14 @@ function hasCompleteCommitData(repo: Repo): boolean {
   )
 }
 
+function hasCompleteLanguageData(repo: Repo): boolean {
+  return (
+    typeof repo.languages === 'object' &&
+    repo.languages !== null &&
+    Object.keys(repo.languages).length > 0
+  )
+}
+
 function mergeRepoData(existingRepo: Repo, fetchedRepo: Repo): Repo {
   const pushChanged = existingRepo.pushed_at !== fetchedRepo.pushed_at
 
@@ -205,6 +216,7 @@ function mergeRepoData(existingRepo: Repo, fetchedRepo: Repo): Repo {
     ...existingRepo,
     ...fetchedRepo,
     commits: pushChanged ? undefined : existingRepo.commits,
+    languages: pushChanged ? undefined : existingRepo.languages,
   }
 }
 
@@ -418,6 +430,21 @@ async function fetchCommits(owner: string, repo: string): Promise<{ firstCommit:
   }
 }
 
+async function fetchLanguages(owner: string, repo: string): Promise<Record<string, number> | null> {
+  log(`  Fetching languages for ${repo}...`)
+  await updateState({ currentPhase: 'fetching-languages', currentItem: `${owner}/${repo}` })
+
+  try {
+    const data = await fetchWithRetry(
+      `${GITHUB_API}/repos/${owner}/${repo}/languages`
+    ) as Record<string, number>
+    return data || null
+  } catch (err) {
+    log(`  Failed to fetch languages for ${repo}: ${err}`)
+    return null
+  }
+}
+
 async function printState() {
   const s = await loadState()
   const p = await loadProgress()
@@ -435,8 +462,9 @@ async function printState() {
   console.log('║                      DATA STATS                             ║')
   console.log('╠══════════════════════════════════════════════════════════════╣')
   console.log(`║ Total Repos:    ${String(r.length).padEnd(42)}║`)
-  console.log(`║ Repos w/Commits: ${String(r.filter(x => x.commits?.lastCommit).length).padEnd(41)}║`)
-  console.log(`║ API Calls:      ${String(s.stats.apiCalls).padEnd(42)}║`)
+    console.log(`║ Repos w/Commits: ${String(r.filter(x => x.commits?.lastCommit).length).padEnd(41)}║`)
+    console.log(`║ Repos w/Langs:  ${String(r.filter(x => x.languages && Object.keys(x.languages).length > 0).length).padEnd(41)}║`)
+    console.log(`║ API Calls:      ${String(s.stats.apiCalls).padEnd(42)}║`)
   if (s.startedAt) console.log(`║ Started:        ${s.startedAt!.substring(0, 42).padEnd(42)}║`)
   if (s.lastRunAt) console.log(`║ Last Run:       ${s.lastRunAt!.substring(0, 42).padEnd(42)}║`)
   if (s.completedAt) console.log(`║ Completed:      ${s.completedAt!.substring(0, 42).padEnd(42)}║`)
@@ -497,7 +525,7 @@ async function run() {
       startedAt: new Date().toISOString(),
       completedAt: null,
       isComplete: false,
-      stats: { totalRepos: 0, reposWithCommits: 0, totalCommitsFetched: 0, apiCalls: 0 }
+      stats: { totalRepos: 0, reposWithCommits: 0, totalCommitsFetched: 0, reposWithLanguages: 0, apiCalls: 0 }
     }
   }
 
@@ -522,6 +550,12 @@ async function run() {
     progress.currentRepoIndex = firstIncompleteRepoIndex === -1 ? repos.length : firstIncompleteRepoIndex
     progress.lastCommitRepo =
       progress.currentRepoIndex < repos.length ? repos[progress.currentRepoIndex].full_name : null
+    await saveProgress(progress)
+  }
+
+  if (progress.phase === 'languages') {
+    const firstIncompleteRepoIndex = repos.findIndex((repo) => !hasCompleteLanguageData(repo))
+    progress.currentRepoIndex = firstIncompleteRepoIndex === -1 ? repos.length : firstIncompleteRepoIndex
     await saveProgress(progress)
   }
 
@@ -617,6 +651,44 @@ async function run() {
         await updateState({ stats: state.stats })
         
         // Small delay between commits to be nice to the API
+        await new Promise(resolve => setTimeout(resolve, 500))
+      }
+
+      progress.phase = 'languages'
+      progress.currentRepoIndex = 0
+      progress.lastCommitRepo = null
+      await saveProgress(progress)
+      log('Commits done. Moving to languages...')
+    }
+
+    // Phase 3: Fetch languages for each repo
+    if (progress.phase === 'languages') {
+      log(`Phase 3: Fetching languages for ${repos.length} repos...`)
+
+      let reposWithLanguages = repos.filter(r => r.languages && Object.keys(r.languages).length > 0).length
+
+      for (let i = progress.currentRepoIndex; i < repos.length; i++) {
+        const repo = repos[i]
+
+        if (hasCompleteLanguageData(repo)) {
+          log(`Skipping ${repo.name} (already has languages)`)
+          continue
+        }
+
+        progress.currentRepoIndex = i
+        await saveProgress(progress)
+
+        const languages = await fetchLanguages(repo.owner.login, repo.name)
+        if (languages) {
+          repo.languages = languages
+          reposWithLanguages++
+          state.stats.reposWithLanguages = reposWithLanguages
+        }
+
+        await saveRepos(repos)
+        await updateState({ stats: state.stats })
+
+        // Small delay between language fetches to be nice to the API
         await new Promise(resolve => setTimeout(resolve, 500))
       }
     }

@@ -81,11 +81,23 @@ function RepoDetailPage() {
               <GitBranch className="h-4 w-4" />
               {repo.default_branch}
             </span>
-            {repo.language && (
-              <span className="rounded-full bg-[var(--chip-bg)] px-2.5 py-0.5 text-xs font-medium text-[var(--sea-ink-soft)]">
+            {repo.languages && Object.keys(repo.languages).length > 0 ? (
+              Object.entries(repo.languages)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 3)
+                .map(([lang]) => (
+                  <span
+                    key={lang}
+                    className="border-2 border-[var(--line)] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]"
+                  >
+                    {lang}
+                  </span>
+                ))
+            ) : repo.language ? (
+              <span className="border-2 border-[var(--line)] bg-[var(--chip-bg)] px-2 py-0.5 text-xs font-bold text-[var(--sea-ink-soft)]">
                 {repo.language}
               </span>
-            )}
+            ) : null}
           </div>
         </div>
 

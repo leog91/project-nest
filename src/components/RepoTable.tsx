@@ -31,6 +31,31 @@ const columns = [
       )
     },
   }),
+  columnHelper.accessor((row) => row.languages, {
+    id: 'languages',
+    header: 'Languages',
+    enableSorting: false,
+    cell: (info) => {
+      const langs = info.getValue()
+      if (!langs || Object.keys(langs).length === 0) return '-'
+      const top3 = Object.entries(langs)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([name]) => name)
+      return (
+        <span className="flex flex-wrap gap-x-2 gap-y-1">
+          {top3.map((lang) => (
+            <span
+              key={lang}
+              className="border border-[var(--line)] bg-[var(--chip-bg)] px-1.5 py-0.5 text-xs font-medium text-[var(--sea-ink-soft)]"
+            >
+              {lang}
+            </span>
+          ))}
+        </span>
+      )
+    },
+  }),
   columnHelper.accessor((row) => row.commits.lastCommit, {
     id: 'lastCommit',
     header: 'Last Commit',

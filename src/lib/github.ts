@@ -9,6 +9,7 @@ export interface GitHubRepo {
   forks_count: number
   open_issues_count: number
   language: string | null
+  languages?: Record<string, number>
   visibility: string
   default_branch: string
   created_at: string

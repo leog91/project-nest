@@ -1,6 +1,6 @@
 {
   "username": "leog91",
-  "lastUpdated": "2026-05-20T07:24:48.890Z",
+  "lastUpdated": "2026-05-20T22:02:46.412Z",
   "repos": [
     {
       "id": 434000690,
@@ -115,6 +115,9 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 159453
       }
     },
     {
@@ -230,6 +233,13 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "Svelte": 3704,
+        "TypeScript": 2859,
+        "JavaScript": 512,
+        "HTML": 430,
+        "CSS": 59
       }
     },
     {
@@ -345,6 +355,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 8048,
+        "HTML": 1721,
+        "CSS": 991
       }
     },
     {
@@ -460,6 +475,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 2635,
+        "HTML": 692,
+        "CSS": 58
       }
     },
     {
@@ -575,6 +595,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 19079,
+        "HTML": 14874
       }
     },
     {
@@ -690,6 +714,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 59654,
+        "CSS": 1401,
+        "JavaScript": 189
       }
     },
     {
@@ -805,6 +834,12 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "Astro": 30870,
+        "TypeScript": 4954,
+        "JavaScript": 835,
+        "CSS": 60
       }
     },
     {
@@ -882,7 +917,7 @@
       "clone_url": "https://github.com/leog91/hiker.git",
       "svn_url": "https://github.com/leog91/hiker",
       "homepage": "https://hiker-navy.vercel.app",
-      "size": 225,
+      "size": 277,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -920,6 +955,12 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 36478,
+        "Astro": 6952,
+        "JavaScript": 428,
+        "CSS": 22
       }
     },
     {
@@ -1035,6 +1076,9 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 5753
       }
     },
     {
@@ -1150,6 +1194,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "Astro": 4095,
+        "JavaScript": 357
       }
     },
     {
@@ -1265,6 +1313,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "HTML": 2111,
+        "JavaScript": 1920
       }
     },
     {
@@ -1380,6 +1432,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 18118,
+        "JavaScript": 479,
+        "CSS": 59
       }
     },
     {
@@ -1495,6 +1552,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 189618,
+        "CSS": 4070
       }
     },
     {
@@ -1616,6 +1677,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 51336,
+        "CSS": 66
       }
     },
     {
@@ -1731,6 +1796,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 18175,
+        "HTML": 1721,
+        "CSS": 1647
       }
     },
     {
@@ -1846,6 +1916,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 8761,
+        "JavaScript": 4653,
+        "CSS": 2332
       }
     },
     {
@@ -1961,6 +2036,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 2279,
+        "CSS": 926
       }
     },
     {
@@ -2076,6 +2155,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 11691,
+        "CSS": 275
       }
     },
     {
@@ -2191,6 +2274,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 21179,
+        "CSS": 2255,
+        "Shell": 19
       }
     },
     {
@@ -2306,6 +2394,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 3213,
+        "CSS": 2275
       }
     },
     {
@@ -2421,6 +2513,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 8302,
+        "CSS": 2682
       }
     },
     {
@@ -2536,6 +2632,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "HTML": 27063,
+        "CSS": 7502,
+        "JavaScript": 2782
       }
     },
     {
@@ -2651,6 +2752,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 2758,
+        "CSS": 2072
       }
     },
     {
@@ -2767,7 +2872,8 @@
         "push": true,
         "triage": true,
         "pull": true
-      }
+      },
+      "languages": {}
     },
     {
       "id": 187968671,
@@ -2882,7 +2988,8 @@
         "push": true,
         "triage": true,
         "pull": true
-      }
+      },
+      "languages": {}
     },
     {
       "id": 155617567,
@@ -3003,6 +3110,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 25600,
+        "CSS": 764
       }
     },
     {
@@ -3118,6 +3229,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 19369,
+        "HTML": 1590,
+        "CSS": 452
       }
     },
     {
@@ -3233,6 +3349,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 10205,
+        "HTML": 1662,
+        "CSS": 689
       }
     },
     {
@@ -3348,6 +3469,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "Java": 42930,
+        "Shell": 7058,
+        "Batchfile": 5006
       }
     },
     {
@@ -3463,6 +3589,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 52760,
+        "HTML": 19835,
+        "CSS": 1506
       }
     },
     {
@@ -3578,6 +3709,12 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 4118368,
+        "CSS": 571117,
+        "HTML": 11524,
+        "TypeScript": 173
       }
     },
     {
@@ -3693,7 +3830,8 @@
         "push": true,
         "triage": true,
         "pull": true
-      }
+      },
+      "languages": {}
     },
     {
       "id": 87239787,
@@ -3809,7 +3947,8 @@
         "push": true,
         "triage": true,
         "pull": true
-      }
+      },
+      "languages": {}
     },
     {
       "id": 68963519,
@@ -3924,6 +4063,11 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "JavaScript": 16023,
+        "HTML": 7727,
+        "CSS": 1410
       }
     },
     {
@@ -4039,7 +4183,8 @@
         "push": true,
         "triage": true,
         "pull": true
-      }
+      },
+      "languages": {}
     },
     {
       "id": 45145083,
@@ -4154,6 +4299,9 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "Java": 9651
       }
     },
     {
@@ -4224,14 +4372,14 @@
       "releases_url": "https://api.github.com/repos/leog91/project-nest/releases{/id}",
       "deployments_url": "https://api.github.com/repos/leog91/project-nest/deployments",
       "created_at": "2026-03-24T23:04:38Z",
-      "updated_at": "2026-03-24T23:32:59Z",
-      "pushed_at": "2026-03-24T23:32:55Z",
+      "updated_at": "2026-05-20T21:45:54Z",
+      "pushed_at": "2026-05-20T21:45:49Z",
       "git_url": "git://github.com/leog91/project-nest.git",
       "ssh_url": "git@github.com:leog91/project-nest.git",
       "clone_url": "https://github.com/leog91/project-nest.git",
       "svn_url": "https://github.com/leog91/project-nest",
       "homepage": "https://project-nest-psi.vercel.app",
-      "size": 151,
+      "size": 156,
       "stargazers_count": 0,
       "watchers_count": 0,
       "language": "TypeScript",
@@ -4260,8 +4408,8 @@
       "default_branch": "master",
       "commits": {
         "firstCommit": "2026-03-24T23:07:30Z",
-        "lastCommit": "2026-03-24T23:32:51Z",
-        "totalCommits": 4
+        "lastCommit": "2026-05-20T21:45:43Z",
+        "totalCommits": 7
       },
       "permissions": {
         "admin": true,
@@ -4269,6 +4417,10 @@
         "push": true,
         "triage": true,
         "pull": true
+      },
+      "languages": {
+        "TypeScript": 51174,
+        "CSS": 4780
       }
     }
   ]
