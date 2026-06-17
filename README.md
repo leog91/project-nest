@@ -10,7 +10,7 @@ A personal dashboard to track and browse GitHub repository activity. It scrapes 
 
 - **[TanStack Start](https://tanstack.com/start)** — Full-stack React framework
 - **[TanStack Router](https://tanstack.com/router)** — File-based routing
-- **[TanStack Query](https://tanstack.com/query)** — Client-side data caching
+- **[TanStack Query](https://tanstack.com/query)** — Client-side data caching (used for README rendering)
 - **[TanStack Table](https://tanstack.com/table)** — Data tables
 - **[Tailwind CSS v4](https://tailwindcss.com)** — Styling
 - **[Nitro](https://nitro.unjs.io)** — Production server
@@ -132,6 +132,7 @@ The scraper is fault-tolerant:
 - If you stop it manually (`Ctrl+C`), it saves progress.
 - The next time you run `pnpm scrape`, it resumes exactly where it left off.
 - If a repo gets a new push since the last scrape, its commit metadata is automatically refreshed.
+- If a repo's `pushed_at` has not changed, its existing commit metadata and language data are preserved — no extra API calls are made for that repo.
 
 ### Data Files
 
@@ -140,6 +141,14 @@ The scraper is fault-tolerant:
 | `app-data/repos.data` | The main data file consumed by the frontend. Contains all repos, metadata, and commit info. |
 | `.cache/scrape-state.json` | High-level scraper state (running/complete/error, stats). |
 | `.cache/scrape-progress.json` | Low-level progress (current page, repo index) for resuming. |
+
+### Caching
+
+There are two caching layers:
+
+1. **Scraper cache** — `app-data/repos.data` is only updated when you run `pnpm scrape`. During a scrape, the script compares each repo's `pushed_at` timestamp with the previously saved value. Repos that have not received a new push keep their existing commit and language data, avoiding unnecessary GitHub API calls.
+
+2. **Browser cache** — Repository READMEs are fetched client-side from `raw.githubusercontent.com` and cached by TanStack Query for 5 minutes. They are not part of the scraped data file.
 
 ---
 
@@ -160,6 +169,7 @@ project-nest/
 │   │   ├── Footer.tsx
 │   │   ├── Header.tsx
 │   │   ├── QueryProvider.tsx
+│   │   ├── RepoReadme.tsx
 │   │   ├── RepoTable.tsx
 │   │   └── ThemeToggle.tsx
 │   ├── lib/
@@ -184,7 +194,7 @@ project-nest/
 | Route | Description |
 |-------|-------------|
 | `/` | Home page — lists all repositories in a sortable table. |
-| `/repo/:owner/:name` | Detail page for a specific repository. |
+| `/repo/:owner/:name` | Detail page for a specific repository. Shows metadata, stats, and the rendered README fetched from GitHub. |
 | `/about` | About page. |
 
 ---
