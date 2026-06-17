@@ -3,21 +3,18 @@ import { createServerFn } from '@tanstack/react-start'
 import { Calendar, GitBranch, Star, GitFork, ExternalLink } from 'lucide-react'
 import { formatDate, formatNumber } from '../lib/github'
 import { getLanguageColor } from '../lib/languageColors'
+import RepoReadme from '../components/RepoReadme'
 
 const getRepoPageData = createServerFn({ method: 'GET' })
   .inputValidator((data: { owner: string; name: string }) => data)
   .handler(async ({ data }) => {
-    const { getRepoDetails, getRecentCommits } = await import('../lib/github.server')
-    const [repo, commits] = await Promise.all([
-      getRepoDetails(data.owner, data.name),
-      getRecentCommits(data.owner, data.name, 15),
-    ])
+    const { getRepoDetails } = await import('../lib/github.server')
+    const repo = await getRepoDetails(data.owner, data.name)
 
     return {
       owner: data.owner,
       name: data.name,
       repo,
-      commits,
     }
   })
 
@@ -27,7 +24,7 @@ export const Route = createFileRoute('/repo/$owner/$name')({
 })
 
 function RepoDetailPage() {
-  const { owner, name, repo, commits } = Route.useLoaderData()
+  const { owner, name, repo } = Route.useLoaderData()
 
   if (!repo) {
     return (
@@ -133,36 +130,11 @@ function RepoDetailPage() {
             />
           </div>
 
-          <h2 className="mb-4 text-lg font-semibold text-[var(--sea-ink)]">
-            Recent Commits
-          </h2>
-          
-          {commits && commits.length > 0 ? (
-            <ul className="space-y-3">
-              {commits.map((commit) => (
-                <li
-                  key={commit.sha}
-                  className="flex items-start gap-3 rounded-xl border border-[var(--line)] bg-[var(--surface)] p-4 transition hover:bg-[var(--link-bg-hover)]"
-                >
-                  <code className="mt-0.5 flex-shrink-0 rounded bg-[var(--chip-bg)] px-2 py-1 text-xs font-mono text-[var(--sea-ink-soft)]">
-                    {commit.sha.slice(0, 7)}
-                  </code>
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate font-medium text-[var(--sea-ink)]">
-                      {commit.message}
-                    </p>
-                    <p className="mt-1 text-xs text-[var(--sea-ink-soft)]">
-                      {commit.author} · {formatDate(commit.date)}
-                    </p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-center text-sm text-[var(--sea-ink-soft)]">
-              No commits found.
-            </p>
-          )}
+          <RepoReadme
+            owner={owner}
+            name={name}
+            defaultBranch={repo.default_branch}
+          />
         </div>
       </div>
     </main>

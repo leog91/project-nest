@@ -235,3 +235,64 @@ a {
     transform: translateY(0);
   }
 }
+
+/* README rendering */
+.readme-github {
+  --tw-prose-body: var(--sea-ink);
+  --tw-prose-headings: var(--sea-ink);
+  --tw-prose-lead: var(--sea-ink-soft);
+  --tw-prose-links: var(--lagoon-deep);
+  --tw-prose-bold: var(--sea-ink);
+  --tw-prose-counters: var(--sea-ink-soft);
+  --tw-prose-bullets: var(--sea-ink-soft);
+  --tw-prose-hr: var(--line);
+  --tw-prose-quotes: var(--sea-ink-soft);
+  --tw-prose-quote-borders: var(--line);
+  --tw-prose-captions: var(--sea-ink-soft);
+  --tw-prose-code: var(--sea-ink);
+  --tw-prose-pre-code: var(--sea-ink);
+  --tw-prose-pre-bg: var(--chip-bg);
+  --tw-prose-th-borders: var(--line);
+  --tw-prose-td-borders: var(--line);
+
+  --tw-prose-invert-body: var(--sea-ink);
+  --tw-prose-invert-headings: var(--sea-ink);
+  --tw-prose-invert-lead: var(--sea-ink-soft);
+  --tw-prose-invert-links: var(--lagoon-deep);
+  --tw-prose-invert-bold: var(--sea-ink);
+  --tw-prose-invert-counters: var(--sea-ink-soft);
+  --tw-prose-invert-bullets: var(--sea-ink-soft);
+  --tw-prose-invert-hr: var(--line);
+  --tw-prose-invert-quotes: var(--sea-ink-soft);
+  --tw-prose-invert-quote-borders: var(--line);
+  --tw-prose-invert-captions: var(--sea-ink-soft);
+  --tw-prose-invert-code: var(--sea-ink);
+  --tw-prose-invert-pre-code: var(--sea-ink);
+  --tw-prose-invert-pre-bg: var(--chip-bg);
+  --tw-prose-invert-th-borders: var(--line);
+  --tw-prose-invert-td-borders: var(--line);
+}
+
+.readme-github pre {
+  border: 2px solid var(--line);
+  border-radius: 0;
+}
+
+.readme-github code {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-weight: inherit;
+}
+
+.readme-github :not(pre) > code {
+  border: 2px solid var(--line);
+  background: var(--chip-bg);
+  color: var(--sea-ink);
+  padding: 2px 6px;
+  font-weight: 700;
+}
+
+.readme-github blockquote {
+  border-left-width: 4px;
+}
