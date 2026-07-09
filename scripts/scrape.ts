@@ -10,7 +10,13 @@ const ENV_FILE = '.env'
 const STALE_RUN_MS = 5 * 60 * 1000
 
 const GITHUB_API = 'https://api.github.com'
-const USERNAME = process.argv[2] || 'leog91'
+
+const args = process.argv.slice(2)
+const usernameArg = args.find(arg => !arg.startsWith('-')) || 'leog91'
+const isStatusArg = args.includes('--status') || args.includes('-s')
+const forceRunArg = args.includes('--force') || args.includes('-f')
+
+const USERNAME = usernameArg
 let GITHUB_TOKEN = process.env.GITHUB_TOKEN
 
 function parseEnvValue(rawValue: string): string {
@@ -227,6 +233,32 @@ let apiCalls = 0
 
 function log(message: string) {
   console.log(`[${new Date().toISOString()}] ${message}`)
+}
+
+let isShuttingDown = false
+
+async function handleShutdownSignal(signal: string) {
+  if (isShuttingDown) return
+  isShuttingDown = true
+
+  log(`Received ${signal}. Saving state and exiting...`)
+
+  if (state) {
+    state.isRunning = false
+    state.error = `Interrupted by ${signal}`
+    try {
+      await saveState(state)
+    } catch (err) {
+      log(`Failed to save state during shutdown: ${err}`)
+    }
+  }
+
+  process.exit(0)
+}
+
+function setupShutdownHandlers() {
+  process.on('SIGINT', () => handleShutdownSignal('SIGINT'))
+  process.on('SIGTERM', () => handleShutdownSignal('SIGTERM'))
 }
 
 async function updateState(updates: Partial<ScrapeState>) {
@@ -486,9 +518,8 @@ async function printState() {
 async function run() {
   await loadEnvFile()
   GITHUB_TOKEN = process.env.GITHUB_TOKEN
-  const command = process.argv[3]
-  
-  if (command === '--status' || command === '-s') {
+
+  if (isStatusArg) {
     await printState()
     return
   }
@@ -503,16 +534,19 @@ async function run() {
   
   // Check if scraper is already running
   if (state.isRunning) {
-    if (shouldClearRunningState(state)) {
-      log('Found leftover running state. Clearing it and resuming...')
+    if (forceRunArg || shouldClearRunningState(state)) {
+      log(forceRunArg
+        ? 'Forced run. Clearing running state...'
+        : 'Found leftover running state. Clearing it and resuming...')
       state.isRunning = false
       state.currentPhase = 'idle'
       state.currentItem = null
       await saveState(state)
     } else {
-    log('Scraper is already running! Check status with: npm run scrape -- --status')
-    await printState()
-    return
+      log('Scraper is already running! Check status with: npm run scrape -- --status')
+      log('Use --force to override if the previous run crashed.')
+      await printState()
+      return
     }
   }
 
@@ -534,6 +568,7 @@ async function run() {
   state.isComplete = false
   state.error = null
   await saveState(state)
+  setupShutdownHandlers()
 
   repos = await loadRepos()
   progress = await loadProgress() || {
